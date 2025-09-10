@@ -1,0 +1,26 @@
+{
+  "app": "monday-multiplication-calculator",
+  "version": "1.0.0",
+  "type": "custom",
+  "name": "Multiplication Calculator",
+  "description": "Calculate results with custom multiplication factors",
+  "icon": "icon.png",
+  "tags": ["productivity", "calculations"],
+  "screens": [
+    {
+      "id": "item_view",
+      "name": "Item View",
+      "path": "/item-view"
+    }
+  ],
+  "scopes": ["me:read", "boards:read", "boards:write"],
+  "webhooks": [
+    {
+      "eventType": "change_column_value",
+      "url": "/webhooks/monday"
+    }
+  ],
+  "settings": {
+    "webhookUrl": "https://your-backend-domain.com/webhooks/monday"
+  }
+}

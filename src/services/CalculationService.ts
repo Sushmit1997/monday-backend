@@ -232,9 +232,10 @@ const createCalculationService = (config: CalculationServiceConfig) => {
   };
 
   // Get all items function
-  const getAllItems = async (boardId: string): Promise<any[]> => {
+  const getAllItems = async (boardId: string): Promise<unknown[]> => {
     try {
-      const board = await mondayApi.getBoardById(boardId);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const board = await mondayApi.getBoardById(boardId) as any;
       return board.items_page?.items || [];
     } catch (error) {
       console.error(`[CalculationService] Error getting all items:`, error);

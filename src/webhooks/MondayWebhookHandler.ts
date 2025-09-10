@@ -26,8 +26,8 @@ const shouldProcessWebhook = (payload: MondayWebhookPayload, inputColumnId: stri
 };
 
 // Pure function to parse input value
-const parseInputValue = (value: any): number | null => {
-  const parsed = parseFloat(String(value?.value || '0'));
+const parseInputValue = (value: unknown): number | null => {
+  const parsed = parseFloat(String((value as { value: number })?.value || '0'));
   return isNaN(parsed) ? null : parsed;
 };
 
@@ -73,7 +73,7 @@ const handleColumnChange = async (
 
 // Create Monday webhook handler factory
 const createMondayWebhookHandler = (config: MondayWebhookHandlerConfig) => {
-  const { mondayApi, calculationService, inputColumnId } = config;
+  const { calculationService, inputColumnId } = config;
 
   // Handle webhook function
   const handleWebhook = async (req: Request, res: Response): Promise<void> => {

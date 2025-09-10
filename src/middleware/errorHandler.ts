@@ -5,7 +5,7 @@ export const errorHandler = (
   error: Error,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): void => {
   console.error('[ErrorHandler]', error);
 
@@ -27,7 +27,7 @@ export const errorHandler = (
   }
 
   // Handle MongoDB duplicate key errors
-  if (error.name === 'MongoError' && (error as any).code === 11000) {
+  if (error.name === 'MongoError' && 'code' in error && (error as { code: number }).code === 11000) {
     statusCode = 409;
     message = 'Resource already exists';
   }

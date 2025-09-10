@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { FactorDocument } from '../types';
 
 const FactorSchema = new Schema<FactorDocument>({
@@ -21,7 +21,7 @@ const FactorSchema = new Schema<FactorDocument>({
 // Virtual for JSON serialization
 FactorSchema.set('toJSON', {
   virtuals: true,
-  transform: function(doc: any, ret: any) {
+  transform: function(doc: unknown, ret: any) {
     delete ret._id;
     delete ret.__v;
     return ret;

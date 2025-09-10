@@ -235,12 +235,12 @@ const createMondayApiService = (config: MondayApiServiceConfig) => {
   };
 
   // Verify webhook function
-  const verifyWebhook = async (webhookSecret: string, payload: string, signature: string): Promise<boolean> => {
+  const verifyWebhook = async (webhookSecret: string, _payload: string, _signature: string): Promise<boolean> => {
     return webhookSecret === process.env.WEBHOOK_SECRET;
   };
 
   // Get board by ID function
-  const getBoardById = async (boardId: string): Promise<any> => {
+  const getBoardById = async (boardId: string): Promise<unknown> => {
     const query = `
       query GetBoardById($boardId: ID!) {
         boards(ids: [$boardId]) {

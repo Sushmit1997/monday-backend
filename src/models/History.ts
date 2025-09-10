@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { HistoryDocument } from '../types';
 
 const HistorySchema = new Schema<HistoryDocument>({
@@ -46,7 +46,7 @@ HistorySchema.index({ triggeredBy: 1 });
 // Virtual for JSON serialization
 HistorySchema.set('toJSON', {
   virtuals: true,
-  transform: function(doc: any, ret: any) {
+  transform: function(doc: unknown, ret: any) {
     delete ret._id;
     delete ret.__v;
     return ret;

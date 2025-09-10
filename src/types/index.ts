@@ -41,7 +41,7 @@ export interface MondayWebhookPayload {
   };
 }
 
-export interface MondayApiResponse<T = any> {
+export interface MondayApiResponse<T = unknown> {
   data: T;
   errors?: Array<{
     message: string;
@@ -71,7 +71,7 @@ export interface HistoryDocument {
   inputValue?: number;
   resultValue?: number;
   triggeredBy: 'api' | 'webhook' | 'system';
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   createdAt: Date;
 }
 

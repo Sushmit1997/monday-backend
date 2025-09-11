@@ -237,14 +237,32 @@ Content-Type: application/json
 X-Monday-Signature: your_signature
 
 {
-  "eventType": "change_column_value",
-  "pulseId": "1234567890",
-  "columnId": "your_input_column_id",
-  "value": {
-    "text": "10"
-  },
-  "previousValue": {
-    "text": "5"
+  "event": {
+    "app": "string",
+    "type": "update_column_value",
+    "triggerTime": "ISO 8601 timestamp",
+    "subscriptionId": "number",
+    "isRetry": "boolean",
+    "userId": "number",
+    "originalTriggerUuid": "string | null",
+    "boardId": "number",
+    "groupId": "string",
+    "pulseId": "number",
+    "pulseName": "string",
+    "columnId": "string",
+    "columnType": "string",
+    "columnTitle": "string",
+    "value": {
+      "value": "number",
+      "unit": "string | null"
+    },
+    "previousValue": {
+      "value": "number",
+      "unit": "string | null"
+    },
+    "changedAt": "number",
+    "isTopGroup": "boolean",
+    "triggerUuid": "string"
   }
 }
 ```
@@ -283,6 +301,7 @@ src/
 │   └── environment.ts # Environment validation
 ├── middleware/       # Express middleware
 │   ├── errorHandler.ts
+│   ├── noCache.ts
 │   └── index.ts
 ├── models/          # MongoDB schemas
 │   ├── Factor.ts    # Factor model
@@ -294,7 +313,6 @@ src/
 ├── services/        # Business logic
 │   ├── MondayApiService.ts    # Monday.com API client
 │   ├── CalculationService.ts  # Calculation logic
-│   ├── OAuthMondayService.ts  # OAuth service
 │   └── index.ts
 ├── types/           # TypeScript type definitions
 │   └── index.ts
@@ -304,41 +322,6 @@ src/
 └── index.ts         # Application entry point
 ```
 
-
-## 🚀 Deployment
-
-### Docker Deployment
-
-1. Create a `Dockerfile`:
-
-```dockerfile
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
-
-COPY . .
-RUN yarn build
-
-EXPOSE 3000
-
-CMD ["yarn", "start"]
-```
-
-2. Build and run:
-
-```bash
-docker build -t monday-backend .
-docker run -p 3000:3000 --env-file .env monday-backend
-```
-
-### Environment-Specific Configuration
-
-- **Development**: Use `env.local` for local development
-- **Production**: Set environment variables in your deployment platform
-- **Testing**: Use `.env.test` for test environment
 
 ## 🔍 Monitoring and Logging
 
@@ -363,14 +346,6 @@ yarn lint:fix     # Fix ESLint errors
 ### Code Style
 
 The project uses ESLint with TypeScript rules. Run `yarn lint:fix` to automatically fix style issues.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run the linter to check code style
-5. Submit a pull request
 
 ## 📄 License
 

@@ -7,7 +7,7 @@ import { connectDatabase } from './config/database';
 import { createMondayApiService, createCalculationService } from './services';
 import { createMondayWebhookHandler } from './webhooks';
 import { createItemsRouter } from './routes';
-import { errorHandler, notFoundHandler } from './middleware';
+import { errorHandler, notFoundHandler, noCache } from './middleware';
 
 // Service initialization functions
 const initializeServices = () => {
@@ -43,6 +43,9 @@ const setupMiddleware = (app: express.Application): void => {
       : true,
     credentials: true,
   }));
+
+  // Disable caching for all API responses
+  app.use(noCache);
 
   // Rate limiting
   app.use(rateLimit(config.apiRateLimit));

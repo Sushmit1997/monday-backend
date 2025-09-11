@@ -21,6 +21,7 @@ const FactorSchema = new Schema<FactorDocument>({
 // Virtual for JSON serialization
 FactorSchema.set('toJSON', {
   virtuals: true,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transform: function(doc: unknown, ret: any) {
     delete ret._id;
     delete ret.__v;

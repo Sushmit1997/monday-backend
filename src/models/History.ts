@@ -46,6 +46,7 @@ HistorySchema.index({ triggeredBy: 1 });
 // Virtual for JSON serialization
 HistorySchema.set('toJSON', {
   virtuals: true,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transform: function(doc: unknown, ret: any) {
     delete ret._id;
     delete ret.__v;

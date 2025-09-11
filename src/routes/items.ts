@@ -62,7 +62,7 @@ export const createItemsRouter = (calculationService: ReturnType<typeof createCa
         error.statusCode = 500;
         throw error;
       }
-
+      res.status(201);
       res.json({
         success: true,
         data: {
@@ -113,7 +113,6 @@ export const createItemsRouter = (calculationService: ReturnType<typeof createCa
   router.get('/:itemId/history', async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { itemId } = req.params;
-      console.log('itemId', itemId);
       const limit = parseInt(req.query.limit as string) || 50;
 
       if (!itemId) {
@@ -145,7 +144,7 @@ export const createItemsRouter = (calculationService: ReturnType<typeof createCa
 
 
   //Create router for fetching all items
-router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
       const items = await calculationService.getAllItems(process.env.DEFAULT_BOARD_ID as string);
       res.json({

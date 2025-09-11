@@ -2,7 +2,6 @@
   "name": "monday-backend",
   "version": "1.0.0",
   "description": "TypeScript Express backend for Monday.com integration with MongoDB",
-  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
